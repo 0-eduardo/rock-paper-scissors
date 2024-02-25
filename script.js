@@ -1,3 +1,6 @@
+let gameRounds = 5;
+let score = 0;
+
 function getComputerChoice() {
     let options = ['Rock', 'Paper', 'Scissors'];
     return options[Math.floor(Math.random() * 3)];
@@ -8,29 +11,43 @@ function playRound(playerSelection, computerSelection) {
         case 'Rock':
             switch (computerSelection) {
                 case 'Rock':
-                    return 'No one wins! It is a TIE.';
+                    return 0;
                 case 'Paper':
-                    return 'You lose! Paper beats Rock.';
+                    return -1;
                 case 'Scissors':
-                    return 'You win! Rock beats Scissors.'
+                    return 1;
             }
         case 'Paper':
             switch (computerSelection) {
                 case 'Paper':
-                    return 'No one wins! It is a TIE.';
+                    return 0;
                 case 'Scissors':
-                    return 'You lose! Scissors beats Paper.';
+                    return -1;
                 case 'Rock':
-                    return 'You win! Paper beats Rock.'
+                    return 1;
             }
         case 'Scissors':
-        switch (computerSelection) {
-            case 'Scissors':
-                return 'No one wins! It is a TIE.';
-            case 'Rock':
-                return 'You lose! Rock beats Scissors.';
-            case 'Paper':
-                return 'You win! Scissors beats Paper.'
-        }
+            switch (computerSelection) {
+                case 'Scissors':
+                    return 0;
+                case 'Rock':
+                    return -1;
+                case 'Paper':
+                    return 1;
+            }
+    }
+}
+
+function playGame() {
+    for (let i = 0; i < gameRounds; i++) {
+        let playerMove = prompt('Your move: ', getComputerChoice());
+        score += playRound(playerMove, getComputerChoice());
+    }
+    
+    if (score > 0) {
+        console.log('You won!');
+    }
+    else {
+        console.log('You lost!')
     }
 }
